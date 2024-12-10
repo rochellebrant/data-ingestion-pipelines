@@ -1,4 +1,4 @@
-%md
+"""
 # Overview
 This script performs a series of operations to fetch file metadata from an SMB (Server Message Block) share, processes this metadata, and updates a target database table in a Spark environment. This process includes recursively listing files in an SMB folder, handling errors, and integrating the fetched metadata with existing data.
 
@@ -23,6 +23,8 @@ The `list_netapp_content_into_dataframe` function recursively lists contents of 
   - Uses `COALESCE` to update fields with new values where available.
   - Updates the `isAtSource` column based on specific conditions.
   - Writes the final DataFrame to the target table, optimizes the target table, and drops the temporary table.
+"""
+
 # dbutils.widgets.text('jobGroup', '600')
 # dbutils.widgets.text('jobOrder', '20'
 
