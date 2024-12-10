@@ -1,4 +1,4 @@
-%md
+"""
 # Overview
 This script effectively manages data processing tasks involving exclusion criteria, classification, and database operations using Apache Spark in Python. It leverages various utility functions and classes (`Utility`, `ExclusionManager`, `Classifier`, and `DatabaseManager`) that handle different aspects of data validation, exclusion management, classification, and database operations to streamline the workflow and ensure data integrity and efficiency.
 
@@ -45,6 +45,8 @@ The `DatabaseManager` class manages database operations such as fetching data, d
   - Updates the DataFrame with classification results using `DatabaseManager.update_data_to_classify`.
   - Appends updated data to the target table using `DatabaseManager.append_dataframe`.
   - Deletes redundant rows from the source table using `DatabaseManager.delete_duplicate_rows_by_latest_exclusion`.
+"""
+
 # dbutils.widgets.text('jobGroup', '600')
 # dbutils.widgets.text('jobOrder', '1')
 # dbutils.widgets.text('sourceDBName', 'unstruct_metadata')
