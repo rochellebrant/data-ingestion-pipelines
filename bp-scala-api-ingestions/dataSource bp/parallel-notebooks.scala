@@ -1,7 +1,6 @@
 import scala.concurrent.{Future, Await}
 import scala.concurrent.duration._
 import scala.util.control.NonFatal
-
 case class NotebookData(path: String, timeout: Int, parameters: Map[String, String] = Map.empty[String, String])
 
 def parallelNotebooks(notebooks: Seq[NotebookData]): Future[Seq[String]] = {
@@ -10,7 +9,7 @@ def parallelNotebooks(notebooks: Seq[NotebookData]): Future[Seq[String]] = {
   import scala.concurrent.ExecutionContext
   import com.databricks.WorkflowException
 
-  val numNotebooksInParallel = 10 
+  val numNotebooksInParallel = 7
   // If you create too many notebooks in parallel the driver may crash when you submit all of the jobs at once. 
   // This code limits the number of parallel notebooks.
   implicit val ec = ExecutionContext.fromExecutor(Executors.newFixedThreadPool(numNotebooksInParallel))
