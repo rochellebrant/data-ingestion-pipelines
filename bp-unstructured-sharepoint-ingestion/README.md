@@ -14,7 +14,7 @@ The purpose of this pattern is to copy data from a SharePoint site, either recur
 <br>
 
 # SPO File Ingestion Workflow
-![Uploading image.png…]()
+![image](https://github.com/user-attachments/assets/e3398ead-61f9-46a7-a3ac-f0202c216012)
 
 
 - Azure Data Factory (ADF) orchestrates and manages the entire job execution.
