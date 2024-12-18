@@ -14,7 +14,8 @@ The purpose of this pattern is to copy data from a SharePoint site, either recur
 <br>
 
 # SPO File Ingestion Workflow
-![unstruct_spo_file_ingestion.drawio.png](/.attachments/unstruct_spo_file_ingestion.drawio-f2ace949-1787-4f3a-ab1c-d96535e832fb.png)
+![Uploading image.png…]()
+
 
 - Azure Data Factory (ADF) orchestrates and manages the entire job execution.
 - The process authenticates to the SharePoint Online (SPO) site using a service principal (SPN).
