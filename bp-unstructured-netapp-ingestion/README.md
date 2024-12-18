@@ -25,7 +25,8 @@ SMB allows applications and users to read and write to files and request service
 
 # NetApp File Ingestion Workflow
 
-![Netapp_to_Blob.jpg](/.attachments/Netapp_to_Blob-37515df2-8111-4c02-9f7a-c599be25efb8.jpg)
+![image](https://github.com/user-attachments/assets/485b7221-6bb7-440e-bf45-e6f4b81f55f3)
+
 
 - The process comprises of 3 steps:
    1. Listing files from the NetApp source into the `unstruct_metadata.netapp_configuration` table.
