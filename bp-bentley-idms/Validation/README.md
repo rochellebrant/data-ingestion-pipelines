@@ -38,3 +38,100 @@ def processTags(
   source_database: String,
   source_table: String
 ): Unit
+```
+
+---
+
+## Parameters
+- tag_names: A sequence of tag names to filter and process.
+- target_storage_name: The name of the Azure Blob Storage account.
+- target_container_name: The container name in Azure Blob Storage.
+- target_storage_key: The access key for the Azure storage account.
+- target_file_path: The path to the Parquet file in the container.
+- source_database: The name of the source database in Spark SQL.
+- source_table: The name of the source table in the database.
+
+---
+
+## Execution Workflow
+
+1. **Azure Blob Storage Configuration**:
+   - Configures Spark to access Azure Blob Storage using the provided storage key.
+
+2. **Target Data Loading**:
+   - Reads the Parquet data from the specified Azure Blob Storage path into a Spark DataFrame.
+
+3. **Tag Processing**:
+   - Filters the DataFrame for the specified tags.
+   - For each tag:
+     1. Computes the record count in the target data.
+     2. Identifies the minimum `ts_utc` value for the tag in the target data.
+     3. Executes a SQL query on the source database to fetch the count of records for the tag where `ts_utc` >= the minimum timestamp.
+     4. Compares the source and target record counts.
+     5. Logs the results, highlighting mismatches.
+
+4. **Error Handling**:
+   - Catches and logs exceptions for individual tags to ensure the process continues for the remaining tags.
+
+---
+
+## Example Usage
+
+```scala
+processTags(
+  tag_names = Seq("Tag1", "Tag2", "Tag3"),
+  target_storage_name = "mystorageaccount",
+  target_container_name = "mycontainer",
+  target_storage_key = "mysecretstoragekey",
+  target_file_path = "data/my_parquet_file",
+  source_database = "my_database",
+  source_table = "my_table"
+)
+```
+
+---
+
+## Logging
+
+The function provides detailed logs:
+- For each tag, it logs:
+  - Tag name.
+  - Minimum timestamp (`ts_utc`) in the target data.
+  - Record counts from both source and target datasets.
+  - Match/mismatch status of the counts.
+- Errors encountered during processing.
+
+Example Log:
+```yaml
+Tag1
+        Minimum tag time:       2023-01-01T00:00:00Z
+        Target count:           100
+        Source count:           100
+        ✅ Counts match
+--------------------------------------------------------------------------------------------------------
+```
+
+
+---
+
+## Error Handling and Debugging
+
+1. **Error Logging**: Any exception during processing of a tag is logged, including the exception message and stack trace.
+2. **Debugging**: Use the printed stack trace to troubleshoot issues such as:
+   - Incorrect Azure credentials or file paths.
+   - Discrepancies in source and target data schemas.
+   - SQL query failures.
+
+---
+
+## Notes and Recommendations
+- Ensure the schemas of the source and target datasets match for seamless validation.
+- Use appropriate Azure storage account permissions to avoid access issues.
+- If working with large datasets, consider optimizing the Spark job (e.g., repartitioning data).
+
+---
+
+## License
+
+This code is provided as-is for internal use. Ensure compliance with your organization's policies when handling sensitive data.
+
